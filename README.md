@@ -4,7 +4,7 @@
 
 > **Status: experimental.** 個人の作業のなかで書いた規約をそのまま公開している。内容も構成も変わりうる。
 
-規約の全文は [skills/ja-writing-rules/SKILL.md](skills/ja-writing-rules/SKILL.md) にある。
+規約の全文は [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) にある。
 
 ## 何のためのものか
 
@@ -14,28 +14,79 @@
 - README・設計文書・仕様書・リリースノート・commit message
 - エンジニアでない読み手に向けた案内文と通知文
 
-## 使い方
+## 配布のしくみ
 
-規約として読むなら [skills/ja-writing-rules/SKILL.md](skills/ja-writing-rules/SKILL.md) を開く。
+スキルはリポジトリ内の `shared-skills/` にあり、フックは Claude Code プラグインとして配る。
 
-Claude Code で使うなら、`skills/ja-writing-rules/` をスキルの置き場所に配置する。
+- 利用側は、このリポジトリのクローンを一つだけ持つ。既定の場所は `~/.local/share/ja-writing-rules`。環境変数 `JA_WRITING_RULES_HOME` で変えられる
+- 利用側のプロジェクトは、`.agents/skills/<スキル名>` を、クローン内の `shared-skills/<スキル名>` へのシンボリックリンクにする。`.claude/skills` は `../.agents/skills` へのリンクにする。Claude と Codex が同じファイルを読む
+- プラグインはフックだけを提供する。スキルを提供しない。プラグインの `skills/` はスキルを自動で読み込むため、スキルを `shared-skills/` に置いて二重読み込みを避けている
+
+```
+shared-skills/
+├── ja-writing-rules/   規約の本体 (SKILL.md、reference/reports.md、reference/naming.md)
+├── ja-naming/          命名。規則は ja-writing-rules/reference/naming.md を参照
+├── ja-report/          報告文。規則は ja-writing-rules/reference/reports.md を参照
+├── ja-prose/           技術文書のリズムと推敲
+├── slop-removal/       AI 生成文に出る型の除去
+└── ja-lint-rules/      検査規則の登録と見直し
+hooks/                  PostToolUse の検査フック (ja_lint/)
+.claude-plugin/         plugin.json と marketplace.json
+init.py                 利用側への登録
+```
+
+同じ規則を複数の場所に書かない。規則の正本は `ja-writing-rules` にあり、ほかのスキルは参照する。
+
+## インストール
+
+1. クローンを置く。
 
 ```bash
-# 一つのプロジェクトで使う
-cp -r skills/ja-writing-rules <プロジェクト>/.claude/skills/
-
-# すべてのプロジェクトで使う
-cp -r skills/ja-writing-rules ~/.claude/skills/
+git clone <このリポジトリの URL> ~/.local/share/ja-writing-rules
 ```
 
-規約と参照先はスキルの中にあるので、このコピーだけで完結する。
+別の場所に置くなら `JA_WRITING_RULES_HOME` を設定する。
 
+2. 利用側のプロジェクトで登録する。まず `plan` で何が変わるかを見る。
+
+```bash
+python3 ~/.local/share/ja-writing-rules/init.py plan --root <プロジェクト>
+python3 ~/.local/share/ja-writing-rules/init.py apply --root <プロジェクト>
 ```
-skills/ja-writing-rules/
-├── SKILL.md              規約の本体
-└── reference/
-    ├── reports.md        報告文
-    └── naming.md         命名と訳語
+
+`init.py` がするのは次の三つだけである。スキルもフックもコピーしない。
+
+- `.claude/settings.json` に `extraKnownMarketplaces` (種別 `directory`、パスは `$JA_WRITING_RULES_HOME`) と、`enabledPlugins` の `ja-writing-rules@ja-writing-rules` を書く。既にある別の設定は変えない
+- `.agents/skills/<スキル名>` のシンボリックリンクを作り、無ければ `.claude/skills` を `../.agents/skills` へのリンクにする。実ファイルや実ディレクトリがあるときは置き換えず、エラーで止まる
+- `.claude/ja-lint/rules.jsonl` を空で作る。フックを有効にする目印である。要らなければ `--no-lint` を付ける
+
+更新はクローンで `git pull` するだけでよい。利用側のプロジェクトは何も変えなくてよい。
+
+テストは `python3 -m unittest discover -s tests` で動く。
+
+## 検査フック (ja-lint)
+
+Write と Edit のあとに、書かれた日本語のファイルを機械的に検査し、該当する規則の警告を出す。警告は助言であり、作業を止めない。
+
+フックは、プロジェクトに `.claude/ja-lint/` ディレクトリがあるときだけ動く。無いプロジェクトでは何も検査せず、何も書かない。
+
+動いているときの検査対象は次の条件で決まる。
+
+- プロジェクトの中のファイルだけを検査する
+- 日本語の文字が 30 字以上あるファイルだけを検査する。コードブロック、インラインコード、URL、HTML タグ、フロントマターは除いて検査する
+- `CLAUDE.md`、`AGENTS.md`、`MEMORY.md`、`rules.jsonl`、`.claude/logs/` 以下は検査しない
+- 環境変数 `JA_LINT=off` で止められる
+
+規則は `hooks/ja_lint/rules.jsonl` にある。プロジェクト固有の規則は `.claude/ja-lint/rules.jsonl` に書くと、同梱の規則に足して読まれる。規則の足し方は `ja-lint-rules` スキルにある。検査した記録は `.claude/logs/ja_lint/checked.jsonl` に残る。
+
+## 使い方
+
+規約として読むなら [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) を開く。
+
+Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルをコピーしてもよい。更新は追従しない。
+
+```bash
+cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
 ```
 
 人に読ませる日本語を書くときスキルが起動する。引用文、法令の定型表現、コード識別子、既存 UI のラベルには適用しない。
@@ -62,10 +113,12 @@ Sonnet 以上を勧める。Haiku では、渡していない事実を書くこ�
 
 ## 参考にした資料
 
-[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) と [W3C COGA](https://www.w3.org/TR/coga-usable/) の考え方を参考にした。一覧は [SKILL.md](skills/ja-writing-rules/SKILL.md#参考にした資料) にある。
+[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) と [W3C COGA](https://www.w3.org/TR/coga-usable/) の考え方を参考にした。一覧は [SKILL.md](shared-skills/ja-writing-rules/SKILL.md#参考にした資料) にある。
 
 調査したが採用しなかった資料と、その理由は [docs/design-notes.md](docs/design-notes.md) に書く。
 
 ## ライセンス
 
 MIT License。[LICENSE](LICENSE) を参照。
+
+外部リポジトリのファイルは含めない。`ja-prose` と `slop-removal` は、MIT License の外部のスキル ([yomiyasu](https://github.com/nanaism/yomiyasu)、[skill-deslop](https://github.com/stephenturner/skill-deslop)、[humanizer](https://github.com/jooray/humanizer)) を参考に規則を書き直した。検査スクリプトと詳しい一覧は、それらのスキルが入っているときだけ使う。使い方は各スキルの SKILL.md にある。

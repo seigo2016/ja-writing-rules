@@ -1,2 +1,3 @@
 .claude/
 .review-standards/
+__pycache__/

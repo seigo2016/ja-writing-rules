@@ -1,0 +1,8 @@
+{
+  "name": "ja-writing-rules",
+  "description": "Advisory writing-lint hook for Japanese prose. The writing skills are shared through symlinks (see README), not through the plugin.",
+  "version": "0.1.0",
+  "author": {
+    "name": "seigo2016"
+  }
+}

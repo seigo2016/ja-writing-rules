@@ -1,0 +1,14 @@
+{
+  "name": "ja-writing-rules",
+  "description": "Japanese writing rules: skills shared by symlink, plus an opt-in lint hook.",
+  "owner": {
+    "name": "seigo2016"
+  },
+  "plugins": [
+    {
+      "name": "ja-writing-rules",
+      "source": "./",
+      "description": "PostToolUse writing-lint hook for Japanese prose. Does nothing unless the project has .claude/ja-lint/."
+    }
+  ]
+}

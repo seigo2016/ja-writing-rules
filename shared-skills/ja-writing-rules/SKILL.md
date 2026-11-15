@@ -5,7 +5,7 @@ description: Use when writing or revising Japanese prose a human will read — r
 
 # ja-writing-rules — 読み手が一度で受け取れる日本語
 
-報告文と命名は下記の参照先に詳しい。
+報告文と命名は下記の参照先に詳しい。この SKILL.md と `reference/` が、各規則の正本である。`ja-naming`、`ja-report`、`ja-prose`、`slop-removal` は、ここにある規則を再掲せず参照する。
 
 ## 適用しない場所
 
@@ -13,7 +13,7 @@ description: Use when writing or revising Japanese prose a human will read — r
 - 法令・契約・規格の定型表現
 - コード識別子、API 名、コマンド、設定キー
 - 既存 UI の固定ラベル
-- 学術論文
+- 学術論文。論文の草稿は `ja-prose` と `slop-removal` を使う
 - 忠実さを優先する翻訳
 - 利用者が文体を指定した場合。指定が優先する
 
@@ -28,6 +28,9 @@ description: Use when writing or revising Japanese prose a human will read — r
 | 人に返す報告、障害連絡、進捗共有 | [reference/reports.md](reference/reports.md) |
 | 日本語で名前を決める、訳語を選ぶ | [reference/naming.md](reference/naming.md) |
 | README、設計文書、仕様書、通知文 | 下記の共通ルール |
+| 文のリズム、擬人化・比喩動詞の整理、論文・技術文書の推敲 | `ja-prose` スキル |
+| AI 生成文に出る型の除去 | `slop-removal` スキル |
+| 検査規則 (ja-lint) の追加と見直し | `ja-lint-rules` スキル |
 
 ## 共通ルール
 
