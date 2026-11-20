@@ -5,7 +5,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 # ja-writing-rules — 読み手が一度で受け取れる日本語
 
-報告文と命名は下記の参照先に詳しい。この SKILL.md と `reference/` が、各規則の正本である。`ja-naming`、`ja-report`、`ja-prose`、`slop-removal` は、ここにある規則を再掲せず参照する。
+報告文と命名は下記の参照先に詳しい。この SKILL.md と `reference/` が、各規則の正本である。`ja-naming`、`ja-report`、`ja-prose`、`slop-removal` はここにある規則を再掲せず参照する。
 
 ## 適用しない場所
 
@@ -37,7 +37,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 ### 確かめていないことを書かない
 
-渡された情報の外にあることを、事実として書かない。原因、影響、安全性、競合の有無を、確かめずに書かない。読み手はそれを検証せずに信じる。
+渡された情報の外にあることを、事実として書かない。確かめていない原因、影響、安全性、競合の有無を書かない。読み手はそれを検証せずに信じる。
 
 入力から論理的に導ける結論は書いてよい。導出の根拠を添える。推測を書くなら推測だと示し、何を確かめれば決まるかを添える。
 
@@ -51,7 +51,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 一つの文書のなかで、同じ対象を複数の語で呼ばない。書き終えたら中心になる対象ごとに語を検索して揺れをなくす。
 
-検査の範囲は一つの文書に閉じない。上流の文書と、既に相手へ送った文書も含めて照合する。
+検査の範囲には、上流の文書と、既に相手へ送った文書も含める。
 
 一つの語を一つの品詞で使う。日本語は「する」を付けるだけで名詞が動詞になるため、「閾値する」の形を作らない。
 
@@ -68,7 +68,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 3. その現場の慣行
 4. 一般の文章規約
 
-規約に書かれた数値は目安であって上限ではない。
+規約に書かれた数値は目安とする。
 
 ### 能動態を優先する
 
@@ -78,7 +78,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 ### 起きることを語で書く
 
-読み手が字義どおりに受け取れない語は、何が起きるかを隠す。次の四つの型に出やすい。
+読み手が字義どおりに受け取れない語を使うと、何が起きるかが文から読み取れない。次の四つの型に出やすい。
 
 - 擬人化: 「ログが訴える」「関数が嫌がる」。道具の機能をそのまま書く「ツールがログを集める」は擬人化ではない
 - 英語の慣用句の直訳: 「価値を運ぶ」「開かれた問題」「リスクに晒す」
@@ -118,7 +118,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 分解するのは、専門用語をつなぐ「の」と、動詞を名詞の形にした部分である。専門用語そのものは分解しない。
 
-動詞に開くと、要素どうしの関係を書かざるを得なくなる。名詞の連鎖は主張の構造を隠す。
+動詞に開くと、要素どうしの関係を書かざるを得なくなる。名詞の連鎖のままでは、主張の構造が読み手に見えない。
 
 ### 一つの段落に一つの話題
 
