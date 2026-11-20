@@ -1,6 +1,6 @@
 ---
 name: ja-writing-rules
-description: Use when writing or revising Japanese prose a human will read — reports back to a user, README and design documents, specifications, release notes, and notices for non-engineers. Not for academic papers, quoted text, legal or contractual boilerplate, source-code identifiers, or established UI labels.
+description: Use when writing or revising Japanese technical prose a human will read — README and design documents, specifications, research records, paper drafts, and reports back to a user. Not for quoted text, legal or contractual boilerplate, source-code identifiers, or established UI labels.
 ---
 
 # ja-writing-rules — 読み手が一度で受け取れる日本語
@@ -13,7 +13,6 @@ description: Use when writing or revising Japanese prose a human will read — r
 - 法令・契約・規格の定型表現
 - コード識別子、API 名、コマンド、設定キー
 - 既存 UI の固定ラベル
-- 学術論文の体裁 (章立て、引用の書式、定型の言い回し)。論文の草稿の文と論証には、[reference/revising.md](reference/revising.md)、[reference/argument.md](reference/argument.md)、`ja-prose`、`slop-removal` を使う
 - 忠実さを優先する翻訳
 - 利用者が文体を指定した場合。指定が優先する
 
@@ -27,7 +26,7 @@ description: Use when writing or revising Japanese prose a human will read — r
 |---|---|
 | 人に返す報告、障害連絡、進捗共有 | [reference/reports.md](reference/reports.md) |
 | 日本語で名前を決める、訳語を選ぶ | [reference/naming.md](reference/naming.md) |
-| README、設計文書、仕様書、通知文 | 下記の共通ルール |
+| README、設計文書、仕様書、研究の記録、論文の草稿 | 下記の共通ルール |
 | 人が書いた文書を直す (推敲、校正、読みやすくする) | [reference/revising.md](reference/revising.md) |
 | 主張と根拠のつながりを確かめる (設計文書、研究の記録、論文の草稿) | [reference/argument.md](reference/argument.md) |
 | 文のリズムと論理密度、推敲の手順と検査スクリプト | `ja-prose` スキル |
@@ -110,7 +109,7 @@ description: Use when writing or revising Japanese prose a human will read — r
 
 ### 名詞の連鎖を動詞に開く
 
-主語から述語までに名詞が四つ以上並んでいたら、書き直しを検討する。四つは目安であって上限ではない。
+主語から述語までに名詞が四つ以上並んでいたら、書き直しを検討する。
 
 | 出た形 | 直した形 |
 |---|---|
@@ -127,16 +126,16 @@ description: Use when writing or revising Japanese prose a human will read — r
 
 ### 中身のない文と語を削る
 
-削っても言っていることが変わらない文と語は、読み手の手間だけを増やす。四つの形に出やすい。
+削っても言っていることが変わらない文と語は、読み手の手間だけを増やす。次の四つの形に出やすい。
 
-- 文書そのものについて述べる文: 「本節では〜を扱う」「以下に〜を示す」「以上のように」。整えて短い断定にすると要点のように見えるため、いちばん気づかれずに残る
+- 文書そのものについて述べる文: 「本節では〜を扱う」「以下に〜を示す」「以上のように」。短い断定に整えると要点に見えるため、気づかれずに残りやすい
 - 中身を足さない飾り: 「重要なのは」「正面から」「包括的な」「掘り下げる」。姿勢や重さを示すだけで、何が重要で何を調べたのかを書いていない
-- 先回りの打ち消し: 誰も言っていない誤解を打ち消す「〜というわけではない」。「A は B ではない。C だ」は「A は C だ」と書く
-- 予防線: 誰も主張していない範囲や上限を、あらかじめ断る文。「〜は目安であって上限ではない」「〜とは限らない」「〜することもある」。規則を柔らかく書いたうえで、さらに柔らかくする断りも同じである。どこに適用し、どこに適用しないかを決める限定は予防線ではない
+- 打ち消しを添えた対比: 「A ではなく B である」「B であって A ではない」「A は B ではない。C だ」。打ち消された A は、読み手が考えてもいない選択肢であることが多い。B だけを書く
+- 予防線: 書いた規則や主張を、すぐあとで弱める文。「〜は目安であって上限ではない」「〜とは限らない」「〜することもある」
 
-直し方は削ることである。言い換えて補わない。言い換えると、元になかった調子や決め台詞が入る。削ると文が壊れるなら、その語は中身を担っていたので残す。
+直し方は削ることである。言い換えて補わない。言い換えると、元になかった調子や決め台詞が入る。
 
-残すものもある。節の目的や前提、他の節との関係を示す案内文は、長い仕様書では読み手が位置を知る助けになる。意味の範囲を絞る打ち消しと、読み手が実際に誤りやすい点を正す打ち消しも残す。削るのは文の形であって、内容ではない。
+打ち消しを残すのは、直前の文や文書の文脈から、読み手がその誤りに実際に進むと言えるときだけである。どこに適用し、どこに適用しないかを決める文と、長い仕様書で節の目的や前提を示す案内文は、中身として残す。
 
 ## 症状から引く
 
@@ -160,7 +159,5 @@ description: Use when writing or revising Japanese prose a human will read — r
 以下の考え方を参考にした。
 
 - [Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) (米国、2011年)。根拠法は [Plain Writing Act of 2010](https://www.govinfo.gov/content/pkg/PLAW-111publ274/pdf/PLAW-111publ274.pdf)。能動態、動詞の名詞化、段落の長さ、読み手の知識に合わせることを扱う
-- [W3C COGA — Making Content Usable for People with Cognitive and Learning Disabilities](https://www.w3.org/TR/coga-usable/)。平易な語、長い文書の要約、新しい語を作らないことを扱う
-- [WCAG 2.1](https://www.w3.org/TR/WCAG21/)。読解水準と、珍しい語・略語の説明に関する達成基準
 
 各資料の権利は、それぞれの権利者に帰属する。

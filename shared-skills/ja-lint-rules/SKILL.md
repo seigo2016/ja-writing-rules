@@ -5,7 +5,7 @@ description: Use when a user corrects Japanese wording and that correction shoul
 
 # ja-lint 規則の登録と見直し
 
-日本語検査 (ja-lint) の規則を育てる手順。
+日本語検査 (ja-lint) の規則を登録し、見直す手順。
 ja-lint は `ja-writing-rules` プラグインの PostToolUse フックである。Write と Edit のあとに、書かれた日本語のファイルを検査して警告を出す。警告は助言であり、作業を止めない。
 
 規則の正本は `hooks/ja_lint/rules.jsonl` (`ja-writing-rules` のリポジトリ内) である。
@@ -101,7 +101,7 @@ NO MATCH が落ちるうちは登録しない。
 相手へ送った語が別語に変わっていることに気づいたら、その語だけを `UL-` 規則として、プロジェクト側の `rules.jsonl` に足す。
 
 汎用の台帳は持たない。変わった語そのものを禁止する 1 本を書く。
-`label` には元の語を書き、`good` には送付済みの語をそのまま挙げる。これで次から機械が捕まえる。
+`label` には元の語を書き、`good` には送付済みの語をそのまま挙げる。これで次からフックが警告を出す。
 
 ## 経路 2: 会話履歴から候補を洗い出す
 

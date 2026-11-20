@@ -10,9 +10,9 @@
 
 三つの場面を想定している。
 
-- AI が人に返す報告文。Slack やチャット経由で、エンジニアでない読み手に届く場合を含む
-- README・設計文書・仕様書・リリースノート・commit message
-- エンジニアでない読み手に向けた案内文と通知文
+- 技術文書。README、設計文書、仕様書、リリースノート、commit message
+- 研究の記録と論文の草稿
+- AI が人に返す報告文。読み手は、技術の分かる共同作業者である
 
 ## 配布のしくみ
 
@@ -115,7 +115,7 @@ Sonnet 以上を勧める。Haiku では、渡していない事実を書くこ�
 
 ## 参考にした資料
 
-[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) と [W3C COGA](https://www.w3.org/TR/coga-usable/) の考え方を参考にした。一覧は [SKILL.md](shared-skills/ja-writing-rules/SKILL.md#参考にした資料) にある。
+[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) の考え方を参考にした。一覧は [SKILL.md](shared-skills/ja-writing-rules/SKILL.md#参考にした資料) にある。
 
 調査したが採用しなかった資料と、その理由は [docs/design-notes.md](docs/design-notes.md) に書く。
 
