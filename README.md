@@ -24,10 +24,10 @@
 
 ```
 shared-skills/
-├── ja-writing-rules/   規約の本体 (SKILL.md、reference/reports.md、reference/naming.md)
+├── ja-writing-rules/   規約の本体 (SKILL.md と reference/ の報告文、命名、推敲、論証)
 ├── ja-naming/          命名。規則は ja-writing-rules/reference/naming.md を参照
 ├── ja-report/          報告文。規則は ja-writing-rules/reference/reports.md を参照
-├── ja-prose/           技術文書のリズムと推敲
+├── ja-prose/           技術文書のリズムと論理密度、推敲の手順、検査スクリプトの使い方
 ├── slop-removal/       AI 生成文に出る型の除去
 └── ja-lint-rules/      検査規則の登録と見直し
 hooks/                  PostToolUse の検査フック (ja_lint/)
@@ -97,7 +97,9 @@ cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
 |---|---|
 | 報告文 | 結論を先頭に置く。観測と推測を分ける。根拠を示す。強調を絞る |
 | 語と名前 | 直訳のカタカナ語を作らない。名前を作る前に既存の語を探す。一つの対象に一つの語 |
-| 文と段落 | 能動態を優先する。名詞が四つ以上つながったら動詞に開く。一段落に一つの話題 |
+| 文と段落 | 能動態を優先する。名詞が四つ以上つながったら動詞に開く。起きることを語で書く。否定を畳んでも真偽を保つ。中身のない文と語を削る。一段落に一つの話題 |
+| 人の文書を直す | 確信の度合い、数、主張の重さ、構成を変えない。意味が決まらなければ書き手に問う |
+| 論証 | 因果に仕組みを添える。例の範囲に主張を狭める。譲歩のあとは論を進める |
 | 決まったこと | 送った語は変えない。仕様の語を黙って言い換えない |
 | 症状から引く | 読みにくさの症状から直し方を引く表 |
 
@@ -121,4 +123,13 @@ Sonnet 以上を勧める。Haiku では、渡していない事実を書くこ�
 
 MIT License。[LICENSE](LICENSE) を参照。
 
-外部リポジトリのファイルは含めない。`ja-prose` と `slop-removal` は、MIT License の外部のスキル ([yomiyasu](https://github.com/nanaism/yomiyasu)、[skill-deslop](https://github.com/stephenturner/skill-deslop)、[humanizer](https://github.com/jooray/humanizer)) を参考に規則を書き直した。検査スクリプトと詳しい一覧は、それらのスキルが入っているときだけ使う。使い方は各スキルの SKILL.md にある。
+外部リポジトリのファイルは含めない。規則は、次の外部のスキルを参考に書き下ろした。
+
+- [natural-japanese](https://github.com/coji/natural-japanese) (MIT License)
+- [meiseki](https://github.com/bamboo-nova/meiseki) (MIT License)
+- [japanese-tech-writing](https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d) (Unlicense)
+- [yomiyasu](https://github.com/nanaism/yomiyasu) (MIT License)
+- [skill-deslop](https://github.com/stephenturner/skill-deslop) (MIT License)
+- [humanizer](https://github.com/jooray/humanizer) (MIT License)
+
+何を採り、何を採らなかったかは [docs/design-notes.md](docs/design-notes.md) にある。検査スクリプトと詳しい一覧は、それらが入っているときだけ使う。使い方は `ja-prose` と `slop-removal` の SKILL.md にある。
