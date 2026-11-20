@@ -33,7 +33,7 @@ W3C COGA と WCAG 2.1 も、規約の初めの版で参考にした。平易な�
 - [natural-japanese](https://github.com/coji/natural-japanese): 直すときに足さないものの範囲 (確信の度合い、数の枠、一般論の注意) と、起きることの語で書く考え方を採った。打ち消しの分け方と、構成を理由なく変えないことも採った。全段落の書き出しと、指摘が収束するまで lint を繰り返す手順は採らなかった。通常のターンでは自己ループを回さない (`ja-prose` の原則 4) 方針と合わないためである。検査スクリプトは、入っていれば使う外部の道具として参照する
 - [meiseki](https://github.com/bamboo-nova/meiseki): 二重否定と否定を含む条件を、真偽を保って畳む考え方を採った。textlint と prh の辞書をフックに組み込むことは採らなかった。Node への依存と、警告で作業を止める仕組みが、助言だけを出すフックの設計と合わない。代わりに、二重否定の型だけを `rules.jsonl` に正規表現で足した。文の抜粋を外部の API に送る層も採らなかった
 - [japanese-tech-writing (k16shikano)](https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d): 論証の点検 (`reference/argument.md`) と、言い直しで比喩を見分ける二段の確かめ方を採った。書籍の原稿に固有の細則は採らなかった
-- [yomiyasu](https://github.com/nanaism/yomiyasu): 文の長さと読点の目安、意味を確かめずに補わない原則の考え方を、以前から参考にしている。直す前と後の差を見るスクリプトは、引き続き参照する
+- [yomiyasu](https://github.com/nanaism/yomiyasu): 意味を確かめずに補わない原則の考え方を、以前から参考にしている。文の長さと読点の目安の数値も以前は採っていたが、2026-11 に文の形で決める規則に替えた。直す前と後の差を見るスクリプトは、引き続き参照する
 - [skill-deslop](https://github.com/stephenturner/skill-deslop) と [humanizer](https://github.com/jooray/humanizer): 英語の生成文に出る型の考え方を `slop-removal` に採った。型の詳しい一覧と例は転載せず、入っていれば参照する
 
 natural-japanese、meiseki、japanese-tech-writing が持つ AI らしい日本語の語の一覧は、どれも転載しなかった。この規約は語彙リストを持たないためである。natural-japanese と meiseki の一覧は、どちらも japanese-tech-writing を出典に挙げている。考え方を規約の一か所に書けば足りる。
