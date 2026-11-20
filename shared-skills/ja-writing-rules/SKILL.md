@@ -113,7 +113,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 ### 名詞の連鎖を動詞に開く
 
-主語から述語までに名詞が四つ以上並んでいたら、書き直しを検討する。
+名詞が助詞を挟まずに連なり、要素どうしの関係が文から読めないなら、動詞に開く。
 
 | 出た形 | 直した形 |
 |---|---|

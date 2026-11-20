@@ -16,6 +16,9 @@ from rules import RULES_PATH, load_rules
 
 PROJECT_ROOT = Path(os.environ.get("CLAUDE_PROJECT_DIR") or os.getcwd()).resolve()
 _JAPANESE = re.compile(r"[ぁ-んァ-ヶ一-鿆々〆ヵヶ]")
+# Prose only: in code and config files a "#" comment reads as a Markdown heading, and the rules
+# are about prose (a YAML file with Japanese comments drew thousands of heading warnings).
+PROSE_SUFFIXES = {".md", ".markdown", ".mdx", ".txt", ".rst", ".tex"}
 
 
 def is_disabled() -> bool:
@@ -41,7 +44,7 @@ def check_file(
     if is_disabled():
         return None
     candidate = Path(path)
-    if is_excluded(candidate, project_only):
+    if candidate.suffix.lower() not in PROSE_SUFFIXES or is_excluded(candidate, project_only):
         return None
     try:
         source = candidate.read_text(encoding="utf-8")

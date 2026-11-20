@@ -102,6 +102,14 @@ class PostHookTest(unittest.TestCase):
         path = self.write("doc.md", "ここでサンプル語を使う。" + CLEAN)
         self.assertIn("UL-001", run_hook(self.project, path).stderr)
 
+    def test_only_prose_files_are_checked(self):
+        self.opt_in()
+        for name in ("watch.yaml", "tool.py"):
+            path = self.write(name, "# 実行中・保留の一覧\n" + BAD)
+            self.assertEqual(run_hook(self.project, path).stderr, "", name)
+        for name in ("note.md", "paper.tex", "memo.txt"):
+            self.assertIn("PR-014", run_hook(self.project, self.write(name, BAD)).stderr, name)
+
     def test_a_rule_without_a_recommended_form_is_ignored(self):
         self.opt_in()
         rule = {

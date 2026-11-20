@@ -14,14 +14,6 @@ _BULLET_NOUN_STOP = re.compile(
     r"^\s*(?:[-*+]|[0-9０-９]+[.)）]|[・])\s*[^。！？!?]*$"
 )
 _POLITE_ENDING = re.compile(r"(?:ませんでした|ました|ません|ましょう|ます|でした|です|でしょう)\s*[。！？!?]\s*$")
-_ENDING_FORMS = (
-    (re.compile(r"(?:ませんでした|ました|ません|ましょう|ます|でしょう)\s*[。！？!?]\s*$"), "ます"),
-    (re.compile(r"(?:でした|です)\s*[。！？!?]\s*$"), "です"),
-    (re.compile(r"(?:であった|である|だった|だ)\s*[。！？!?]\s*$"), "だ"),
-    (re.compile(r"(?:していた|している|された|される|られる|れる|ない|かった|した|する|いた|いる)\s*[。！？!?]\s*$"), "常体"),
-)
-
-
 @dataclass(frozen=True)
 class Violation:
     rule_id: str
@@ -141,13 +133,6 @@ def _is_bullet_noun_stop(sentence: Sentence) -> bool:
     return bool(_BULLET_NOUN_STOP.match(sentence.text))
 
 
-def _normalized_ending(sentence: Sentence) -> str | None:
-    for pattern, normalized in _ENDING_FORMS:
-        if pattern.search(sentence.text):
-            return normalized
-    return None
-
-
 def _rule_violations(source: str, masked: str, rules: Iterable[dict[str, Any]]) -> list[Violation]:
     violations: list[Violation] = []
     for rule in rules:
@@ -167,36 +152,6 @@ def _rule_violations(source: str, masked: str, rules: Iterable[dict[str, Any]]) 
             line, sentence = sentence_at(source, masked, detection_offset or match.start())
             violations.append(
                 Violation(rule["id"], rule["severity"], rule["label"], tuple(rule["good"]), line, sentence)
-            )
-    return violations
-
-
-def _repeated_ending_violations(source: str, masked: str) -> list[Violation]:
-    run: list[tuple[Sentence, str]] = []
-    violations: list[Violation] = []
-    for sentence in _sentences(source, masked):
-        if _is_bullet_noun_stop(sentence):
-            run = []
-            continue
-        ending = _normalized_ending(sentence)
-        if ending is None:
-            run = []
-            continue
-        if run and run[-1][1] == ending:
-            run.append((sentence, ending))
-        else:
-            run = [(sentence, ending)]
-        if len(run) == 4:
-            first = run[0][0]
-            violations.append(
-                Violation(
-                    "AGG-ENDING-REPEAT",
-                    "warning",
-                    "同じ文末が 4 文連続",
-                    ("文末の形を変え、段落の拍を作る",),
-                    first.line,
-                    first.text,
-                )
             )
     return violations
 
@@ -236,6 +191,5 @@ def check_text(source: str, rules: Iterable[dict[str, Any]]) -> list[Violation]:
     masked = mask_text(source)
     return (
         _rule_violations(source, masked, rules)
-        + _repeated_ending_violations(source, masked)
         + _style_mixing_violations(source, masked)
     )
