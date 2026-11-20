@@ -4,7 +4,7 @@
 
 > **Status: experimental.** 個人の作業のなかで書いた規約をそのまま公開している。内容も構成も変わりうる。
 
-規約の全文は [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) にある。
+規約の正本は [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) と、同じディレクトリの `reference/` にある。
 
 ## 何のためのものか
 
@@ -28,7 +28,7 @@ shared-skills/
 ├── ja-naming/          命名。規則は ja-writing-rules/reference/naming.md を参照
 ├── ja-report/          報告文。規則は ja-writing-rules/reference/reports.md を参照
 ├── ja-prose/           技術文書のリズムと論理密度、推敲の手順、検査スクリプトの使い方
-├── slop-removal/       AI 生成文に出る型の除去
+├── slop-removal/       英語と翻訳の文に出る AI 生成の型の除去
 └── ja-lint-rules/      検査規則の登録と見直し
 hooks/                  PostToolUse の検査フック (ja_lint/)
 .claude-plugin/         plugin.json と marketplace.json
@@ -81,7 +81,7 @@ Write と Edit のあとに、書かれた日本語のファイルを機械的�
 
 ## 使い方
 
-規約として読むなら [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) を開く。
+規約として読むなら [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) から始める。推敲と論証の規則は `reference/` にある。
 
 Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルをコピーしてもよい。コピーは更新に追従しない。
 
@@ -97,7 +97,7 @@ cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
 |---|---|
 | 報告文 | 結論を先頭に置く。観測と推測を分ける。根拠を示す。強調を絞る |
 | 語と名前 | 直訳のカタカナ語を作らない。名前を作る前に既存の語を探す。一つの対象に一つの語 |
-| 文と段落 | 能動態を優先する。名詞が四つ以上つながったら、動詞に開くことを検討する。起きることを語で書く。否定を畳んでも真偽を保つ。中身のない文と語を削る。一段落に一つの話題 |
+| 文と段落 | 能動態を優先する。名詞が四つ以上つながったら、動詞に開くことを検討する。起きることを語で書く。否定を畳んでも真偽を保つ。中身のない文と語を削る。文の長さと読点は文の形で決める。一段落に一つの話題 |
 | 人の文書を直す | 確信の度合い、数、主張の重さ、構成を変えない。意味が決まらなければ書き手に問う |
 | 論証 | 因果に仕組みを添える。例の範囲に主張を狭める。譲歩のあとは論を進める |
 | 決まったこと | 送った語は変えない。仕様の語を黙って言い換えない |
@@ -105,7 +105,7 @@ cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
 
 専門用語は読み手で決める。読み手が理解する語なら使ってよい。求めるのは、初出で定義を置くことと、一つの意味で使い続けることの二つだけである。
 
-文の語数は数えない。判断は一文一義と、一段落に一つの話題で行う。
+文の長さは、一文一義と、一段落に一つの話題で決める。
 
 ## 対応モデル
 
@@ -115,15 +115,7 @@ Sonnet 以上を勧める。Haiku では、渡していない事実を書くこ�
 
 ## 参考にした資料
 
-[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) の考え方を参考にした。一覧は [SKILL.md](shared-skills/ja-writing-rules/SKILL.md#参考にした資料) にある。
-
-調査したが採用しなかった資料と、その理由は [docs/design-notes.md](docs/design-notes.md) に書く。
-
-## ライセンス
-
-MIT License。[LICENSE](LICENSE) を参照。
-
-外部リポジトリのファイルは含めない。規則は、次の外部のスキルを参考に書き下ろした。
+[Federal Plain Language Guidelines](https://www.plainlanguage.gov/guidelines/) の考え方を参考にした (詳しくは [SKILL.md](shared-skills/ja-writing-rules/SKILL.md#参考にした資料))。規則は、次の外部のスキルも参考にして書き下ろした。
 
 - [natural-japanese](https://github.com/coji/natural-japanese) (MIT License)
 - [meiseki](https://github.com/bamboo-nova/meiseki) (MIT License)
@@ -132,4 +124,8 @@ MIT License。[LICENSE](LICENSE) を参照。
 - [skill-deslop](https://github.com/stephenturner/skill-deslop) (MIT License)
 - [humanizer](https://github.com/jooray/humanizer) (MIT License)
 
-何を採り、何を採らなかったかは [docs/design-notes.md](docs/design-notes.md) にある。検査スクリプトと詳しい一覧は、それらが入っているときだけ使う。使い方は `ja-prose` と `slop-removal` の SKILL.md にある。
+何を採り、何を採らなかったか、調査して採用しなかった資料とその理由は、[docs/design-notes.md](docs/design-notes.md) にある。外部の検査スクリプトと詳しい一覧は、それらが入っているときだけ使う。使い方は `ja-prose` と `slop-removal` の SKILL.md にある。
+
+## ライセンス
+
+MIT License。[LICENSE](LICENSE) を参照。外部リポジトリのファイルは含めない。
