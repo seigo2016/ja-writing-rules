@@ -5,7 +5,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 
 # ja-writing-rules — 読み手が一度で受け取れる日本語
 
-報告文と命名は下記の参照先に詳しい。この SKILL.md と `reference/` が、各規則の正本である。`ja-naming`、`ja-report`、`ja-prose`、`slop-removal` はここにある規則を再掲せず参照する。
+報告文と命名は下記の参照先に詳しい。この SKILL.md と `reference/` が、共通の規則の正本である。文のリズムの規則は `ja-prose`、英語の型の規則は `slop-removal` が正本を持つ。`ja-naming`、`ja-report`、`ja-prose`、`slop-removal` はここにある規則を再掲せず参照する。
 
 ## 適用しない場所
 
@@ -26,7 +26,7 @@ description: Use when writing or revising Japanese technical prose a human will 
 |---|---|
 | 人に返す報告、障害連絡、進捗共有 | [reference/reports.md](reference/reports.md) |
 | 日本語で名前を決める、訳語を選ぶ | [reference/naming.md](reference/naming.md) |
-| README、設計文書、仕様書、研究の記録、論文の草稿 | 下記の共通ルール |
+| README、設計文書、仕様書、リリースノート、commit message、研究の記録、論文の草稿 | 下記の共通ルール |
 | 人が書いた文書を直す (推敲、校正、読みやすくする) | [reference/revising.md](reference/revising.md) |
 | 主張と根拠のつながりを確かめる (設計文書、研究の記録、論文の草稿) | [reference/argument.md](reference/argument.md) |
 | 文のリズムと論理密度、推敲の手順と検査スクリプト | `ja-prose` スキル |
@@ -67,8 +67,6 @@ description: Use when writing or revising Japanese technical prose a human will 
 2. 同じ主題で既に書かれた文書
 3. その現場の慣行
 4. 一般の文章規約
-
-規約に書かれた数値は目安とする。
 
 ### 能動態を優先する
 

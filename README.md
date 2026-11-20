@@ -35,7 +35,7 @@ hooks/                  PostToolUse の検査フック (ja_lint/)
 init.py                 利用側への登録
 ```
 
-同じ規則を複数の場所に書かない。規則の正本は `ja-writing-rules` にあり、ほかのスキルは参照する。
+同じ規則を複数の場所に書かない。共通の規則の正本は `ja-writing-rules` にあり、ほかのスキルは参照する。文のリズムの規則は `ja-prose`、英語の型の規則は `slop-removal` がそれぞれ正本を持つ。
 
 ## インストール
 
@@ -57,10 +57,10 @@ python3 ~/.local/share/ja-writing-rules/init.py apply --root <プロジェクト
 `init.py` がするのは次の三つだけである。スキルもフックもコピーしない。
 
 - `.claude/settings.json` に `extraKnownMarketplaces` (種別 `directory`、パスは `$JA_WRITING_RULES_HOME`) と、`enabledPlugins` の `ja-writing-rules@ja-writing-rules` を書く。既にある別の設定は変えない
-- `.agents/skills/<スキル名>` のシンボリックリンクを作り、無ければ `.claude/skills` を `../.agents/skills` へのリンクにする。実ファイルや実ディレクトリがあるときは置き換えず、エラーで止まる
+- `.agents/skills/<スキル名>` のシンボリックリンクを作る。`.claude/skills` が無ければ `../.agents/skills` へのリンクにし、実ディレクトリならその中にもスキルごとのリンクを作る。リンクを作る場所に実ファイルや実ディレクトリがあるときは置き換えず、エラーで止まる
 - `.claude/ja-lint/rules.jsonl` を空で作る。フックを有効にする目印である。要らなければ `--no-lint` を付ける
 
-更新はクローンで `git pull` するだけでよい。利用側のプロジェクトは何も変えなくてよい。
+更新はクローンで `git pull` するだけでよい。スキルが増えたときだけ、`init.py apply` をもう一度実行して新しいスキルのリンクを作る。
 
 テストは `python3 -m unittest discover -s tests` で動く。
 
