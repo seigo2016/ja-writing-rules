@@ -7,7 +7,7 @@ description: AI-slop マーカー（機械生成と検出される表現パタ�
 
 機械生成特有の統計的マーカー、陳腐な誇張、空虚な文構造を排除し、**主張と観測データだけが残る素直で明瞭な文**にする。
 
-## 2段推敲手順: 下書き → 監査・仕上げ
+## 2段推敲手順: 下書き → 監査と仕上げ
 
 1. **第1段（下書き作成）**: 原文の主張・条件・数値を保ち、素直な表現で起草する。新しい事実を作らない規則は `ja-writing-rules` の「確かめていないことを書かない」に従う。
 2. **第2段（監査と仕上げ）**: 以下の2問で監査し、残った型を解消して最終稿とする。
@@ -30,7 +30,7 @@ description: AI-slop マーカー（機械生成と検出される表現パタ�
 - **抽象 filler**: tapestry, labyrinth, crucible, landscape, realm, journey, multifaceted
 - **メタ言及・前置き**: "Here's the thing:", "Let that sink in.", "At its core", "It is worth noting that", "In today's rapidly evolving landscape"
 - **be 動詞の回避**: "serves as" / "stands as" / "acts as" → 素直に "is" に戻す
-- **意義を盛る分詞構文**: ", highlighting/underscoring its importance", ", setting the stage for" → 削除し事実のみ記す
+- **意義を誇張する分詞構文**: ", highlighting/underscoring its importance", ", setting the stage for" → 削除し事実のみ記す
 - **Puffery 述語**: "a testament to", "plays a crucial/pivotal role", "marking a pivotal moment" → 具体機構を名指すか削除
 
 ### 1b. 文脈依存語（数値・機構の裏付けがある時のみ OK）
@@ -74,7 +74,7 @@ description: AI-slop マーカー（機械生成と検出される表現パタ�
 
 ---
 
-## Pass A & Layer 4: 日本語の読みの負荷・slop 除去
+## Pass A & Layer 4: 日本語の読みの負荷と slop の除去
 
 - **メタ言及と飾り**: 「〜という点が重要である」「注目すべきは」「言うまでもなく」の類は、`ja-writing-rules` の「中身のない文と語を削る」に従って削る。言い換えて補わない。
 - **比喩と直訳**: 擬人化、英語の慣用句の直訳、話し言葉の動詞は、`ja-writing-rules` の「起きることを語で書く」に従う。

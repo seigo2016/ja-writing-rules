@@ -83,7 +83,7 @@ Write と Edit のあとに、書かれた日本語のファイルを機械的�
 
 規約として読むなら [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) を開く。
 
-Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルをコピーしてもよい。更新は追従しない。
+Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルをコピーしてもよい。コピーは更新に追従しない。
 
 ```bash
 cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
