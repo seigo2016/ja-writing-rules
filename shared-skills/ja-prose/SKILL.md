@@ -62,14 +62,14 @@ description: 日本語の技術文書、論文草稿、設計書、README、仕�
 
 直したあとに確かめるときは、このリポジトリの `hooks/ja_lint/revise_check.py` を使う。このスクリプトは、`reference/revising.md` の「直したあとに確かめること」のうち、機械で拾える次のものを並べる。標準ライブラリだけで動き、外と通信しない。
 
-- 直した後にだけある数値・英字の語・カタカナの語と、消えた数値
+- 直したあとに増えた、または減った数値・英字の語・カタカナの語 (漢数字の「三つ」なども数える)
 - 推量の言い方を含む文で、変わったもの
-- 否定を含む文で、変わったもの
+- 否定や条件を含む文で、変わったもの
 - 引用と出典で、変わったもの
 
 ```bash
-python3 <ja-lint>/revise_check.py <直す前> <直した後>
-python3 <ja-lint>/revise_check.py --git <直した後>
+python3 <ja-lint>/revise_check.py <直す前> <直したあと>
+python3 <ja-lint>/revise_check.py --git <直したあと>
 ```
 
-`<ja-lint>` は `$JA_WRITING_RULES_HOME/hooks/ja_lint` を指す。`--git` を付けると、HEAD の版を直す前として比べる。並んだものは確かめる場所で、直すかどうかは規約に照らして決める。主張の重さと構成の変更は、出力の最後の「手で確かめること」に従って確かめる。
+`<ja-lint>` は `$JA_WRITING_RULES_HOME/hooks/ja_lint` (既定は `~/.local/share/ja-writing-rules/hooks/ja_lint`) を指す。`--git` を付けると、HEAD の版を直す前として比べる。並んだものは確かめる場所で、直すかどうかは規約に照らして決める。主張の重さと構成の変更は、出力の最後の「手で確かめること」に従って確かめる。

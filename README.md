@@ -30,7 +30,7 @@ shared-skills/
 ├── ja-prose/           技術文書のリズムと論理密度、推敲の手順、検査スクリプトの使い方
 ├── slop-removal/       英語と翻訳の文に出る AI 生成の型の除去
 └── ja-lint-rules/      検査規則の登録と見直し
-hooks/                  PostToolUse の検査フック (ja_lint/) と、直したあとの差を見る revise_check.py
+hooks/ja_lint/          PostToolUse の検査フックと、直したあとの差を見る revise_check.py
 .claude-plugin/         plugin.json と marketplace.json
 init.py                 利用側への登録
 ```
