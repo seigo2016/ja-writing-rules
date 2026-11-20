@@ -39,7 +39,8 @@ def _valid_rule(value: Any) -> bool:
         return False
     if value["min_count"] < 1:
         return False
-    if not all(isinstance(item, str) and item for item in value["good"]):
+    # A rule without a recommended form leaves the writer guessing how to avoid it (ja-lint-rules).
+    if not value["good"] or not all(isinstance(item, str) and item for item in value["good"]):
         return False
     if not all(isinstance(item, str) for item in value["scenes"]):
         return False

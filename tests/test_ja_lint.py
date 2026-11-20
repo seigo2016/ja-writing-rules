@@ -102,6 +102,18 @@ class PostHookTest(unittest.TestCase):
         path = self.write("doc.md", "ここでサンプル語を使う。" + CLEAN)
         self.assertIn("UL-001", run_hook(self.project, path).stderr)
 
+    def test_a_rule_without_a_recommended_form_is_ignored(self):
+        self.opt_in()
+        rule = {
+            "id": "UL-901", "pattern": "サンプル語", "severity": "warning", "label": "サンプル語を使った",
+            "good": [], "scenes": [], "enabled": True, "min_count": 1,
+        }
+        (self.project / ".claude" / "ja-lint" / "rules.jsonl").write_text(
+            json.dumps(rule, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        path = self.write("doc.md", "ここでサンプル語を使う。" + CLEAN)
+        self.assertNotIn("UL-901", run_hook(self.project, path).stderr)
+
     def test_no_project_specific_rule_ships(self):
         text = (ROOT / "hooks" / "ja_lint" / "rules.jsonl").read_text(encoding="utf-8")
         self.assertNotIn("decidability", text)

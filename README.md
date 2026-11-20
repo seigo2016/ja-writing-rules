@@ -60,7 +60,7 @@ python3 ~/.local/share/ja-writing-rules/init.py apply --root <プロジェクト
 - `.agents/skills/<スキル名>` のシンボリックリンクを作る。`.claude/skills` が無ければ `../.agents/skills` へのリンクにし、実ディレクトリならその中にもスキルごとのリンクを作る。リンクを作る場所に実ファイルや実ディレクトリがあるときは置き換えず、エラーで止まる
 - `.claude/ja-lint/rules.jsonl` を空で作る。フックを有効にする目印である。要らなければ `--no-lint` を付ける
 
-更新はクローンで `git pull` するだけでよい。スキルが増えたときだけ、`init.py apply` をもう一度実行して新しいスキルのリンクを作る。
+更新するには、クローンで `git pull` を実行する。利用側のスキルはクローン内の `shared-skills/<スキル名>` へのシンボリックリンクなので、pull した後の内容をそのまま読む。フックも、Claude Code が directory 形式のプラグインをクローンの場所から読み込むので、pull した後のスクリプトで動く。スキルが増えたときだけ、`init.py apply` をもう一度実行して新しいスキルのリンクを作る。
 
 テストは `python3 -m unittest discover -s tests` で動く。
 
@@ -83,7 +83,7 @@ Write と Edit のあとに、書かれた日本語のファイルを機械的�
 
 規約として読むなら [shared-skills/ja-writing-rules/SKILL.md](shared-skills/ja-writing-rules/SKILL.md) から始める。推敲と論証の規則は `reference/` にある。
 
-Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルをコピーしてもよい。コピーは更新に追従しない。
+Claude Code だけで、シンボリックリンクを使わずに試すなら、スキルを `.claude/skills/` にコピーする。コピーしたスキルはクローンへのリンクではないので、クローンで `git pull` しても変わらない。
 
 ```bash
 cp -r shared-skills/ja-writing-rules <プロジェクト>/.claude/skills/
