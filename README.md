@@ -30,7 +30,7 @@ shared-skills/
 ├── ja-prose/           技術文書のリズムと論理密度、推敲の手順、検査スクリプトの使い方
 ├── slop-removal/       英語と翻訳の文に出る AI 生成の型の除去
 └── ja-lint-rules/      検査規則の登録と見直し
-hooks/                  PostToolUse の検査フック (ja_lint/)
+hooks/                  PostToolUse の検査フック (ja_lint/) と、直したあとの差を見る revise_check.py
 .claude-plugin/         plugin.json と marketplace.json
 init.py                 利用側への登録
 ```
@@ -124,7 +124,7 @@ Sonnet 以上を勧める。Haiku では、渡していない事実を書くこ�
 - [skill-deslop](https://github.com/stephenturner/skill-deslop) (MIT License)
 - [humanizer](https://github.com/jooray/humanizer) (MIT License)
 
-何を採り、何を採らなかったか、調査して採用しなかった資料とその理由は、[docs/design-notes.md](docs/design-notes.md) にある。外部の検査スクリプトと詳しい一覧は、それらが入っているときだけ使う。使い方は `ja-prose` と `slop-removal` の SKILL.md にある。
+何を採り、何を採らなかったか、調査して採用しなかった資料とその理由は、[docs/design-notes.md](docs/design-notes.md) にある。外部のスキルのコードは使わない。直したあとの差は、自前の `hooks/ja_lint/revise_check.py` で確かめる。
 
 ## ライセンス
 

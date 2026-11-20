@@ -1,6 +1,6 @@
 ---
 name: ja-prose
-description: 日本語の技術文書、論文草稿、設計書、README、仕様書を執筆・推敲する際に使用する。文のリズムと論理密度を整え、推敲の手順を示す。外部の natural-japanese や yomiyasu の検査スクリプトが入っていれば、推敲の前後で使う。
+description: 日本語の技術文書、論文草稿、設計書、README、仕様書を執筆・推敲する際に使用する。文のリズムと論理密度を整え、推敲の手順と、直したあとの差を確かめる検査スクリプトの使い方を示す。
 ---
 
 # ja-prose — 技術文書のリズムと論理密度
@@ -56,26 +56,20 @@ description: 日本語の技術文書、論文草稿、設計書、README、仕�
 
 1. 直す前に読み、書き手の主張と、その重さの順を控える。
 2. `reference/revising.md` の「直すときに変えないもの」を守って直す。論文の草稿と設計文書では、`reference/argument.md` で論証も点検する。論証の欠けは補わずに書き手に伝える。
-3. 直したあと、`reference/revising.md` の「直したあとに確かめること」を通す。検査スクリプトが入っていれば、下記の手順で機械的にも確かめる。
+3. 直したあと、`reference/revising.md` の「直したあとに確かめること」を通す。下記の検査スクリプトで、機械で拾える差も確かめる。
 
 ## 検査スクリプトの使い方
 
-検査スクリプトはこのリポジトリに含めない。外部の次の二つが持つ (どちらも MIT License)。役割が違うので、入っているものはすべて使う。片方だけなら、その手順だけを行う。
+直したあとの確かめには、このリポジトリの `hooks/ja_lint/revise_check.py` を使う。`reference/revising.md` の「直したあとに確かめること」のうち、機械で拾える次のものを並べる。標準ライブラリだけで動き、外と通信しない。
 
-| スクリプト | 何を見るか |
-|---|---|
-| [natural-japanese](https://github.com/coji/natural-japanese) の `lint.py` | AI が書いた日本語に出やすい型。人と AI の文書で閾値を校正してある。前回の結果と比べられる |
-| natural-japanese の `calques.py` | 「起きることを語で書く」に当たる語の候補 |
-| [yomiyasu](https://github.com/nanaism/yomiyasu) の `yomiyasu_diff.py` | 直す前と後の差。否定の反転、数値、慎重な言い方が減ったこと、引用の変化 |
-| natural-japanese の `newfacts.py` | 直した後にだけある数値・固有名詞。yomiyasu がないときの代わり。確信の度合いの変化は見ない |
+- 直した後にだけある数値・英字の語・カタカナの語と、消えた数値
+- 推量の言い方を含む文で、変わったもの
+- 否定を含む文で、変わったもの
+- 引用と出典で、変わったもの
 
-natural-japanese はスキルとして有効にしない。この規約と違う指示が同時に読まれるためである。clone して `skills/natural-japanese/scripts/` だけを使う。これらは uv で動き、初回に形態素解析の辞書を取得する。以下の `<nj>` はその `scripts/` を、`<yomiyasu>` は yomiyasu の `skills/yomiyasu/scripts/` を指す。
+```bash
+python3 <ja-lint>/revise_check.py <直す前> <直した後>
+python3 <ja-lint>/revise_check.py --git <直した後>
+```
 
-1. 直す前: `uv run <nj>/lint.py --genre tech --json <対象> > <一時ディレクトリ>/before.json`
-2. 直した後:
-   - `uv run <nj>/lint.py --genre tech --baseline <一時ディレクトリ>/before.json <対象>` で、新しく出た指摘と残った指摘を見る
-   - `uv run <nj>/calques.py <対象>` で、言い直す語の候補を見る
-   - `python3 <yomiyasu>/yomiyasu_diff.py <原文> <直した文>` で、意味が変わる恐れのある箇所を見る。yomiyasu がなければ `uv run <nj>/newfacts.py --git <対象>` で代える
-3. どの指摘も、確かめる場所として扱う。直すかどうかは規約に照らして決める。
-
-どちらも入っていないときは、この手順を飛ばし、飛ばしたことを報告に書く。
+`<ja-lint>` は `$JA_WRITING_RULES_HOME/hooks/ja_lint` を指す。`--git` を付けると、HEAD の版を直す前として比べる。並んだものは確かめる場所で、直すかどうかは規約に照らして決める。主張の重さと構成の変更は、出力の最後の「手で確かめること」に従って手で確かめる。
